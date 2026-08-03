@@ -7,7 +7,7 @@ Build an API-only NestJS demo that evaluates ASTM C150 Type I cement readings vi
 - [x] Add ConfigModule, docker-compose Postgres, Sequelize module + EvaluationReport model
 - [x] Implement pure chemistry lib (LSF/SR/AR/Bogue) with unit tests
 - [x] Add ASTM C150 Type I JSON limits + RuleEngine (PASS/MARGIN/FAIL)
-- [ ] Template narration + optional LLM strategy behind `NARRATION_MODE`
+- [x] Template narration + optional LLM strategy behind `NARRATION_MODE`
 - [ ] Evaluation module: DTOs, orchestrator, POST/GET endpoints, Swagger
 - [ ] README `.env.example` + example payloads; smoke-test template and llm modes
 
