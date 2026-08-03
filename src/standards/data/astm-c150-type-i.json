@@ -1,0 +1,210 @@
+{
+  "id": "ASTM_C150_TYPE_I",
+  "cementType": "ASTM_TYPE_I",
+  "standardVersion": "ASTM C150-22 Type I",
+  "defaultMarginPct": 5,
+  "limits": [
+    {
+      "parameter": "MgO",
+      "path": "oxides.MgO",
+      "op": "max",
+      "value": 6.0,
+      "unit": "%",
+      "group": "chemical",
+      "required": false,
+      "limitLabel": "<= 6.0"
+    },
+    {
+      "parameter": "SO3",
+      "path": "oxides.SO3",
+      "op": "max",
+      "unit": "%",
+      "group": "chemical",
+      "required": false,
+      "conditional": [
+        {
+          "whenPath": "bogue.C3A",
+          "whenOp": "lte",
+          "whenValue": 8,
+          "value": 3.0,
+          "limitLabel": "<= 3.0 (C3A <= 8%)"
+        },
+        {
+          "whenPath": "bogue.C3A",
+          "whenOp": "gt",
+          "whenValue": 8,
+          "value": 3.5,
+          "limitLabel": "<= 3.5 (C3A > 8%)"
+        }
+      ]
+    },
+    {
+      "parameter": "LOI",
+      "path": "oxides.LOI",
+      "op": "max",
+      "value": 3.0,
+      "unit": "%",
+      "group": "chemical",
+      "required": false,
+      "limitLabel": "<= 3.0"
+    },
+    {
+      "parameter": "IR",
+      "path": "oxides.IR",
+      "op": "max",
+      "value": 0.75,
+      "unit": "%",
+      "group": "chemical",
+      "required": false,
+      "limitLabel": "<= 0.75"
+    },
+    {
+      "parameter": "freeLime",
+      "path": "oxides.freeLime",
+      "op": "max",
+      "value": 1.5,
+      "unit": "%",
+      "group": "chemical",
+      "required": false,
+      "limitLabel": "<= 1.5",
+      "notes": "Plant/demo control band (not a numbered ASTM C150 Type I table limit)"
+    },
+    {
+      "parameter": "LSF",
+      "path": "ratios.LSF",
+      "op": "between",
+      "min": 0.92,
+      "max": 0.98,
+      "unit": "-",
+      "group": "process",
+      "required": true,
+      "limitLabel": "0.92 – 0.98",
+      "notes": "Process control band for kiln feed / clinker"
+    },
+    {
+      "parameter": "SR",
+      "path": "ratios.SR",
+      "op": "between",
+      "min": 2.0,
+      "max": 3.0,
+      "unit": "-",
+      "group": "process",
+      "required": true,
+      "limitLabel": "2.0 – 3.0"
+    },
+    {
+      "parameter": "AR",
+      "path": "ratios.AR",
+      "op": "between",
+      "min": 1.3,
+      "max": 2.5,
+      "unit": "-",
+      "group": "process",
+      "required": true,
+      "limitLabel": "1.3 – 2.5"
+    },
+    {
+      "parameter": "C3A",
+      "path": "bogue.C3A",
+      "op": "max",
+      "value": 15.0,
+      "unit": "%",
+      "group": "phases",
+      "required": true,
+      "limitLabel": "<= 15.0",
+      "notes": "Advisory Type I process band"
+    },
+    {
+      "parameter": "C3S",
+      "path": "bogue.C3S",
+      "op": "min",
+      "value": 45.0,
+      "unit": "%",
+      "group": "phases",
+      "required": true,
+      "limitLabel": ">= 45.0",
+      "notes": "Advisory early-strength process band"
+    },
+    {
+      "parameter": "blaineFineness",
+      "path": "physical.blaineFineness",
+      "op": "min",
+      "value": 260,
+      "unit": "m2/kg",
+      "group": "physical",
+      "required": false,
+      "limitLabel": ">= 260"
+    },
+    {
+      "parameter": "initialSettingTimeMin",
+      "path": "physical.initialSettingTimeMin",
+      "op": "min",
+      "value": 45,
+      "unit": "min",
+      "group": "physical",
+      "required": false,
+      "limitLabel": ">= 45"
+    },
+    {
+      "parameter": "finalSettingTimeMin",
+      "path": "physical.finalSettingTimeMin",
+      "op": "max",
+      "value": 375,
+      "unit": "min",
+      "group": "physical",
+      "required": false,
+      "limitLabel": "<= 375"
+    },
+    {
+      "parameter": "autoclaveExpansionPct",
+      "path": "physical.autoclaveExpansionPct",
+      "op": "max",
+      "value": 0.8,
+      "unit": "%",
+      "group": "physical",
+      "required": false,
+      "limitLabel": "<= 0.80"
+    },
+    {
+      "parameter": "soundnessMm",
+      "path": "physical.soundnessMm",
+      "op": "max",
+      "value": 10,
+      "unit": "mm",
+      "group": "physical",
+      "required": false,
+      "limitLabel": "<= 10",
+      "notes": "Le Chatelier-style plant check used in demo payloads"
+    },
+    {
+      "parameter": "compressiveStrengthDay3",
+      "path": "physical.compressiveStrengthMPa.day3",
+      "op": "min",
+      "value": 12,
+      "unit": "MPa",
+      "group": "physical",
+      "required": false,
+      "limitLabel": ">= 12"
+    },
+    {
+      "parameter": "compressiveStrengthDay7",
+      "path": "physical.compressiveStrengthMPa.day7",
+      "op": "min",
+      "value": 19,
+      "unit": "MPa",
+      "group": "physical",
+      "required": false,
+      "limitLabel": ">= 19"
+    },
+    {
+      "parameter": "compressiveStrengthDay28",
+      "path": "physical.compressiveStrengthMPa.day28",
+      "op": "min",
+      "value": 28,
+      "unit": "MPa",
+      "group": "physical",
+      "required": false,
+      "limitLabel": ">= 28"
+    }
+  ]
+}

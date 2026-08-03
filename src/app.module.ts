@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { validateEnv } from './config/env.validation';
 import { DatabaseModule } from './database/database.module';
+import { RuleEngineModule } from './rule-engine/rule-engine.module';
+import { StandardsModule } from './standards/standards.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { DatabaseModule } from './database/database.module';
       validate: validateEnv,
     }),
     DatabaseModule,
+    StandardsModule,
+    RuleEngineModule,
   ],
   controllers: [],
   providers: [],
