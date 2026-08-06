@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   Param,
-  ParseEnumPipe,
   ParseUUIDPipe,
   Post,
   Query,
@@ -12,12 +11,12 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
-  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { Verdict } from '../common/enums';
 import { CreateEvaluationDto } from './dto/create-evaluation.dto';
 import { EvaluationResponseDto } from './dto/evaluation-response.dto';
+import { FindEvaluationsQueryDto } from './dto/find-evaluations-query.dto';
+import { PaginatedEvaluationsResponseDto } from './dto/paginated-evaluations-response.dto';
 import { EvaluationService } from './evaluation.service';
 
 @ApiTags('evaluations')
@@ -35,23 +34,12 @@ export class EvaluationController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List recent evaluation reports' })
-  @ApiQuery({
-    name: 'verdict',
-    required: false,
-    enum: Verdict,
-  })
-  @ApiOkResponse({ type: [EvaluationResponseDto] })
+  @ApiOperation({ summary: 'List evaluation reports' })
+  @ApiOkResponse({ type: PaginatedEvaluationsResponseDto })
   findAll(
-    @Query(
-      'verdict',
-      new ParseEnumPipe(Verdict, {
-        optional: true,
-      }),
-    )
-    verdict?: Verdict,
-  ): Promise<EvaluationResponseDto[]> {
-    return this.evaluationService.findAll(verdict);
+    @Query() query: FindEvaluationsQueryDto,
+  ): Promise<PaginatedEvaluationsResponseDto> {
+    return this.evaluationService.findAll(query);
   }
 
   @Get(':id')

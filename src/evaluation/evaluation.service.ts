@@ -7,6 +7,8 @@ import { ReportsService } from '../reports/reports.service';
 import { EvaluationReport } from '../database/models/evaluation-report.model';
 import { CreateEvaluationDto } from './dto/create-evaluation.dto';
 import { EvaluationResponseDto } from './dto/evaluation-response.dto';
+import { FindEvaluationsQueryDto } from './dto/find-evaluations-query.dto';
+import { PaginatedEvaluationsResponseDto } from './dto/paginated-evaluations-response.dto';
 
 @Injectable()
 export class EvaluationService {
@@ -35,9 +37,7 @@ export class EvaluationService {
     });
 
     if (ruleResult.overallVerdict === Verdict.FAIL) {
-      this.logger.warn(
-        `Evaluation FAIL under ${ruleResult.standardVersion}`,
-      );
+      this.logger.warn(`Evaluation FAIL under ${ruleResult.standardVersion}`);
     }
 
     const narration = await this.narrationService.narrate({
@@ -68,9 +68,26 @@ export class EvaluationService {
     return this.toResponse(report);
   }
 
-  async findAll(verdict?: Verdict): Promise<EvaluationResponseDto[]> {
-    const reports = await this.reportsService.findAll(verdict);
-    return reports.map((report) => this.toResponse(report));
+  async findAll(
+    query: FindEvaluationsQueryDto,
+  ): Promise<PaginatedEvaluationsResponseDto> {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 20;
+    const { rows, count } = await this.reportsService.findAll({
+      overallVerdict: query.overallVerdict,
+      page,
+      limit,
+    });
+
+    return {
+      data: rows.map((report) => this.toResponse(report)),
+      pagination: {
+        total: count,
+        page,
+        limit,
+        totalPages: Math.ceil(count / limit) || 0,
+      },
+    };
   }
 
   private toResponse(report: EvaluationReport): EvaluationResponseDto {
@@ -81,7 +98,8 @@ export class EvaluationService {
       standardApplied: report.standardVersion,
       computedRatios: report.computedRatios as Record<string, number>,
       boguePhases: report.boguePhases as Record<string, number>,
-      parameterResults: report.parameterResults as EvaluationResponseDto['parameterResults'],
+      parameterResults:
+        report.parameterResults as EvaluationResponseDto['parameterResults'],
       recommendations:
         (report.recommendations as EvaluationResponseDto['recommendations']) ??
         [],

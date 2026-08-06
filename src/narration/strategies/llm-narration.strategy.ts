@@ -28,6 +28,10 @@ export class LlmNarrationStrategy implements NarrationStrategy {
       throw new Error('OPENAI_API_KEY is not configured');
     }
 
+    const baseUrl = (
+      this.configService.get<string>('openai.baseUrl') ??
+      'https://api.openai.com/v1'
+    ).replace(/\/$/, '');
     const model =
       this.configService.get<string>('openai.model') ?? 'gpt-4o-mini';
 
@@ -36,29 +40,26 @@ export class LlmNarrationStrategy implements NarrationStrategy {
     const timeout = setTimeout(() => controller.abort(), 8000);
 
     try {
-      const response = await fetch(
-        'https://api.openai.com/v1/chat/completions',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-          },
-          signal: controller.signal,
-          body: JSON.stringify({
-            model,
-            temperature: 0.2,
-            response_format: { type: 'json_object' },
-            messages: [
-              { role: 'system', content: NARRATION_SYSTEM_PROMPT },
-              {
-                role: 'user',
-                content: `${userPrompt}\n\nRespond as {"recommendations":[...]}`,
-              },
-            ],
-          }),
+      const response = await fetch(`${baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
         },
-      );
+        signal: controller.signal,
+        body: JSON.stringify({
+          model,
+          temperature: 0.2,
+          response_format: { type: 'json_object' },
+          messages: [
+            { role: 'system', content: NARRATION_SYSTEM_PROMPT },
+            {
+              role: 'user',
+              content: `${userPrompt}\n\nRespond as {"recommendations":[...]}`,
+            },
+          ],
+        }),
+      });
 
       if (!response.ok) {
         const body = await response.text();

@@ -31,11 +31,22 @@ export class ReportsRepository {
     return this.evaluationReportModel.findByPk(id);
   }
 
-  findAll(filters?: { verdict?: Verdict }): Promise<EvaluationReport[]> {
-    return this.evaluationReportModel.findAll({
-      where: filters?.verdict ? { overallVerdict: filters.verdict } : undefined,
+  async findAll(options?: {
+    overallVerdict?: Verdict;
+    page?: number;
+    limit?: number;
+  }): Promise<{ rows: EvaluationReport[]; count: number }> {
+    const page = options?.page ?? 1;
+    const limit = options?.limit ?? 20;
+    const offset = (page - 1) * limit;
+
+    return this.evaluationReportModel.findAndCountAll({
+      where: options?.overallVerdict
+        ? { overallVerdict: options.overallVerdict }
+        : undefined,
       order: [['createdAt', 'DESC']],
-      limit: 100,
+      limit,
+      offset,
     });
   }
 }

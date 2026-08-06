@@ -22,7 +22,11 @@ export class ReportsService {
     return report;
   }
 
-  findAll(verdict?: Verdict): Promise<EvaluationReport[]> {
-    return this.reportsRepository.findAll({ verdict });
+  findAll(options?: {
+    overallVerdict?: Verdict;
+    page?: number;
+    limit?: number;
+  }): Promise<{ rows: EvaluationReport[]; count: number }> {
+    return this.reportsRepository.findAll(options);
   }
 }

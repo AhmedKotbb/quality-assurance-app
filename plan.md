@@ -160,10 +160,21 @@ DATABASE_USER=qa
 DATABASE_PASSWORD=qa
 DATABASE_NAME=qa_cement
 NARRATION_MODE=template
+OPENAI_BASE_URL=https://api.openai.com/v1
 OPENAI_API_KEY=
 OPENAI_MODEL=gpt-4o-mini
 MARGIN_PCT=5
 ```
+
+For a free demo provider (Groq), use:
+
+```
+NARRATION_MODE=llm
+OPENAI_BASE_URL=https://api.groq.com/openai/v1
+OPENAI_API_KEY=gsk_your_groq_key
+OPENAI_MODEL=llama-3.3-70b-versatile
+```
+
 
 Add a `docker-compose.yml` with Postgres only for one-command local demo.
 
