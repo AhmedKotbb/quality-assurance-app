@@ -9,7 +9,6 @@ export interface ImpactRule {
   issue: string;
 }
 
-// Synced to astm-c150-type-i.json parameter names / limit directions.
 export const IMPACT_RULES: Record<
   string,
   Partial<Record<DeviationDirection, ImpactRule>>
