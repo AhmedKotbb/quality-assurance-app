@@ -27,7 +27,7 @@ export type PartialBoguePhases = {
   [K in keyof BoguePhases]?: number | null;
 };
 
-/** Sum of major oxides commonly reported in a cement analysis (%). */
+// sum of major oxides commonly reported in a cement analysis (%).
 export function sumReportedOxides(oxides: Oxides): number {
   return (
     oxides.CaO +

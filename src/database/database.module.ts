@@ -17,7 +17,6 @@ import { EvaluationReport } from './models/evaluation-report.model';
         database: configService.getOrThrow<string>('database.name'),
         models: [EvaluationReport],
         autoLoadModels: true,
-        // Demo only — replace with migrations before production use.
         synchronize: true,
         logging: false,
       }),

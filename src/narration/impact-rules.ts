@@ -9,10 +9,7 @@ export interface ImpactRule {
   issue: string;
 }
 
-/**
- * Static cement-chemistry impact map. Not AI-generated —
- * used as the template narrator source of truth and as LLM grounding context.
- */
+// cement chemistry impact rules
 export const IMPACT_RULES: Record<
   string,
   Partial<Record<DeviationDirection, ImpactRule>>

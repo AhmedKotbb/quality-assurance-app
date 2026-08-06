@@ -11,9 +11,10 @@ import { RESPONSE_MESSAGE_KEY } from '../decorators/response-message.decorator';
 import { ApiResponseDto } from '../dto/api-response.dto';
 
 @Injectable()
-export class TransformInterceptor<T>
-  implements NestInterceptor<T, ApiResponseDto<T>>
-{
+export class TransformInterceptor<T> implements NestInterceptor<
+  T,
+  ApiResponseDto<T>
+> {
   constructor(private readonly reflector: Reflector) {}
 
   intercept(

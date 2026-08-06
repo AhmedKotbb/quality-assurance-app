@@ -1,9 +1,5 @@
 import { BoguePhases, Oxides, round } from './oxides';
 
-/**
- * Classical Bogue potential compound composition (%).
- * Simplified form from oxides only (no free-lime / SO3 correction).
- */
 export function calcBogue(
   oxides: Pick<Oxides, 'CaO' | 'SiO2' | 'Al2O3' | 'Fe2O3'>,
 ): BoguePhases {

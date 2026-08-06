@@ -6,7 +6,7 @@ function assertPositiveDenominator(name: string, denominator: number): void {
   }
 }
 
-/** Lime Saturation Factor */
+// lime saturation factor
 export function calcLSF(
   CaO: number,
   SiO2: number,
@@ -18,14 +18,14 @@ export function calcLSF(
   return CaO / denominator;
 }
 
-/** Silica Ratio (Silica Modulus) */
+// silica ratio
 export function calcSR(SiO2: number, Al2O3: number, Fe2O3: number): number {
   const denominator = Al2O3 + Fe2O3;
   assertPositiveDenominator('SR', denominator);
   return SiO2 / denominator;
 }
 
-/** Alumina Ratio (Alumina Modulus) */
+// alumina ratio
 export function calcAR(Al2O3: number, Fe2O3: number): number {
   assertPositiveDenominator('AR', Fe2O3);
   return Al2O3 / Fe2O3;
