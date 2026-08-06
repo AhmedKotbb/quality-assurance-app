@@ -1,9 +1,8 @@
-import { calcBogue, resolveBoguePhases } from './bogue';
+import { calcBogue } from './bogue';
 import {
   BoguePhases,
   ComputedRatios,
   Oxides,
-  PartialBoguePhases,
   sumReportedOxides,
 } from './oxides';
 import { calcRatios } from './ratios';
@@ -18,16 +17,12 @@ export interface ChemistryResult {
   oxideSum: number;
 }
 
-/** Derive ratios + Bogue phases from oxide chemistry (and optional supplied phases). */
-export function deriveChemistry(
-  oxides: Oxides,
-  providedBogue?: PartialBoguePhases | null,
-): ChemistryResult {
+export function deriveChemistry(oxides: Oxides): ChemistryResult {
   return {
     ratios: calcRatios(oxides),
-    boguePhases: resolveBoguePhases(oxides, providedBogue),
+    boguePhases: calcBogue(oxides),
     oxideSum: sumReportedOxides(oxides),
   };
 }
 
-export { calcBogue, calcRatios, resolveBoguePhases, sumReportedOxides };
+export { calcBogue, calcRatios, sumReportedOxides };

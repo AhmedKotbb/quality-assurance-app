@@ -7,7 +7,6 @@ import {
   Max,
   Min,
   Validate,
-  ValidateIf,
   ValidateNested,
   ValidatorConstraint,
   ValidatorConstraintInterface,
@@ -99,90 +98,6 @@ export class OxidesDto {
   freeLime?: number;
 }
 
-export class BoguePhasesDto {
-  @ApiPropertyOptional({ example: null, nullable: true })
-  @IsOptional()
-  @ValidateIf((_, value) => value !== null && value !== undefined)
-  @IsNumber()
-  C3S?: number | null;
-
-  @ApiPropertyOptional({ example: null, nullable: true })
-  @IsOptional()
-  @ValidateIf((_, value) => value !== null && value !== undefined)
-  @IsNumber()
-  C2S?: number | null;
-
-  @ApiPropertyOptional({ example: null, nullable: true })
-  @IsOptional()
-  @ValidateIf((_, value) => value !== null && value !== undefined)
-  @IsNumber()
-  C3A?: number | null;
-
-  @ApiPropertyOptional({ example: null, nullable: true })
-  @IsOptional()
-  @ValidateIf((_, value) => value !== null && value !== undefined)
-  @IsNumber()
-  C4AF?: number | null;
-}
-
-export class CompressiveStrengthDto {
-  @ApiPropertyOptional({ example: 22 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  day3?: number;
-
-  @ApiPropertyOptional({ example: 31 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  day7?: number;
-
-  @ApiPropertyOptional({ example: 46 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  day28?: number;
-}
-
-export class PhysicalDto {
-  @ApiPropertyOptional({ example: 350 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  blaineFineness?: number;
-
-  @ApiPropertyOptional({ example: 110 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  initialSettingTimeMin?: number;
-
-  @ApiPropertyOptional({ example: 220 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  finalSettingTimeMin?: number;
-
-  @ApiPropertyOptional({ example: 1.2 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  soundnessMm?: number;
-
-  @ApiPropertyOptional({ example: 0.2 })
-  @IsOptional()
-  @IsNumber()
-  @Min(0)
-  autoclaveExpansionPct?: number;
-
-  @ApiPropertyOptional({ type: CompressiveStrengthDto })
-  @IsOptional()
-  @ValidateNested()
-  @Type(() => CompressiveStrengthDto)
-  compressiveStrengthMPa?: CompressiveStrengthDto;
-}
-
 export class CreateEvaluationDto {
   @ApiProperty({ enum: CementType, example: CementType.ASTM_TYPE_I })
   @IsEnum(CementType)
@@ -194,16 +109,4 @@ export class CreateEvaluationDto {
   @Validate(OxideSumPlausibleConstraint)
   @Type(() => OxidesDto)
   oxides!: OxidesDto;
-
-  @ApiPropertyOptional({ type: BoguePhasesDto })
-  @IsOptional()
-  @ValidateNested()
-  @Type(() => BoguePhasesDto)
-  boguePhases?: BoguePhasesDto;
-
-  @ApiPropertyOptional({ type: PhysicalDto })
-  @IsOptional()
-  @ValidateNested()
-  @Type(() => PhysicalDto)
-  physical?: PhysicalDto;
 }

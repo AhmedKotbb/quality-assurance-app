@@ -27,13 +27,12 @@ export class EvaluationService {
       );
     }
 
-    const chemistry = deriveChemistry(dto.oxides, dto.boguePhases);
+    const chemistry = deriveChemistry(dto.oxides);
     const ruleResult = this.ruleEngineService.evaluate({
       cementType: dto.cementType,
       oxides: dto.oxides,
       ratios: chemistry.ratios,
       boguePhases: chemistry.boguePhases,
-      physical: dto.physical,
     });
 
     if (ruleResult.overallVerdict === Verdict.FAIL) {

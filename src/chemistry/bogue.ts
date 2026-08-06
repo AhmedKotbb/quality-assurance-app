@@ -1,4 +1,4 @@
-import { BoguePhases, Oxides, PartialBoguePhases, round } from './oxides';
+import { BoguePhases, Oxides, round } from './oxides';
 
 /**
  * Classical Bogue potential compound composition (%).
@@ -18,26 +18,5 @@ export function calcBogue(
     C2S: round(C2S),
     C3A: round(C3A),
     C4AF: round(C4AF),
-  };
-}
-
-/**
- * Prefer caller-supplied Bogue phases when present; derive any missing values.
- */
-export function resolveBoguePhases(
-  oxides: Pick<Oxides, 'CaO' | 'SiO2' | 'Al2O3' | 'Fe2O3'>,
-  provided?: PartialBoguePhases | null,
-): BoguePhases {
-  const calculated = calcBogue(oxides);
-
-  if (!provided) {
-    return calculated;
-  }
-
-  return {
-    C3S: provided.C3S ?? calculated.C3S,
-    C2S: provided.C2S ?? calculated.C2S,
-    C3A: provided.C3A ?? calculated.C3A,
-    C4AF: provided.C4AF ?? calculated.C4AF,
   };
 }
