@@ -23,6 +23,7 @@ export interface RuleEngineInput {
   oxides: Oxides;
   ratios: ComputedRatios;
   boguePhases: BoguePhases;
+  oxideSum?: number;
   physical?: PhysicalReadings;
 }
 
@@ -57,6 +58,7 @@ export class RuleEngineService {
       oxides: input.oxides,
       ratios: input.ratios,
       bogue: input.boguePhases,
+      oxideSum: input.oxideSum,
       physical: input.physical ?? {},
     };
 

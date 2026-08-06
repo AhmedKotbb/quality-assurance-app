@@ -46,6 +46,7 @@ describe('RuleEngineService', () => {
       oxides: sampleOxides,
       ratios: chemistry.ratios,
       boguePhases: chemistry.boguePhases,
+      oxideSum: chemistry.oxideSum,
       physical: {
         blaineFineness: 350,
         initialSettingTimeMin: 110,
@@ -73,6 +74,7 @@ describe('RuleEngineService', () => {
       oxides,
       ratios: chemistry.ratios,
       boguePhases: chemistry.boguePhases,
+      oxideSum: chemistry.oxideSum,
     });
 
     expect(result.overallVerdict).toBe(Verdict.FAIL);
@@ -97,6 +99,7 @@ describe('RuleEngineService', () => {
       oxides,
       ratios: chemistry.ratios,
       boguePhases: chemistry.boguePhases,
+      oxideSum: chemistry.oxideSum,
     });
 
     const so3 = result.parameterResults.find((r) => r.parameter === 'SO3');

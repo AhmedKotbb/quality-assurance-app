@@ -3,7 +3,6 @@ import {
   IsEnum,
   IsNumber,
   IsObject,
-  IsOptional,
   Max,
   Min,
   Validate,
@@ -29,6 +28,7 @@ export class OxideSumPlausibleConstraint implements ValidatorConstraintInterface
       (oxides.SO3 ?? 0) +
       (oxides.LOI ?? 0) +
       (oxides.IR ?? 0);
+    console.log(sum);
     return sum >= 95 && sum <= 105;
   }
 
@@ -63,39 +63,39 @@ export class OxidesDto {
   Fe2O3!: number;
 
   @ApiPropertyOptional({ example: 2.1 })
-  @IsOptional()
+  // @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  MgO?: number;
+  MgO!: number;
 
   @ApiPropertyOptional({ example: 2.8 })
-  @IsOptional()
+  // @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  SO3?: number;
+  SO3!: number;
 
   @ApiPropertyOptional({ example: 1.8 })
-  @IsOptional()
+  // @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  LOI?: number;
+  LOI!: number;
 
   @ApiPropertyOptional({ example: 0.5 })
-  @IsOptional()
+  // @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  IR?: number;
+  IR!: number;
 
   @ApiPropertyOptional({ example: 1.1 })
-  @IsOptional()
+  // @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  freeLime?: number;
+  freeLime!: number;
 }
 
 export class CreateEvaluationDto {

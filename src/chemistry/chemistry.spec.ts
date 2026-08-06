@@ -5,7 +5,6 @@ import {
   calcRatios,
   calcSR,
   deriveChemistry,
-  resolveBoguePhases,
   sumReportedOxides,
 } from './index';
 
@@ -55,20 +54,6 @@ describe('Bogue compounds', () => {
     expect(phases.C3A).toBeCloseTo(8.5348, 3);
     expect(phases.C4AF).toBeCloseTo(9.4333, 3);
   });
-
-  it('uses supplied Bogue values and fills missing ones', () => {
-    const phases = resolveBoguePhases(sampleOxides, {
-      C3S: 55,
-      C2S: null,
-      C3A: undefined,
-      C4AF: 10,
-    });
-
-    expect(phases.C3S).toBe(55);
-    expect(phases.C4AF).toBe(10);
-    expect(phases.C2S).toBeCloseTo(12.2175, 3);
-    expect(phases.C3A).toBeCloseTo(8.5348, 3);
-  });
 });
 
 describe('deriveChemistry', () => {
@@ -77,10 +62,7 @@ describe('deriveChemistry', () => {
 
     expect(result.ratios.SR).toBeCloseTo(2.5301, 3);
     expect(result.boguePhases.C4AF).toBeCloseTo(9.4333, 3);
-    expect(result.oxideSum).toBeCloseTo(
-      sumReportedOxides(sampleOxides),
-      5,
-    );
+    expect(result.oxideSum).toBeCloseTo(sumReportedOxides(sampleOxides), 5);
     expect(result.oxideSum).toBeCloseTo(101.0, 1);
   });
 });

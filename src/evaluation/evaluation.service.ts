@@ -33,6 +33,7 @@ export class EvaluationService {
       oxides: dto.oxides,
       ratios: chemistry.ratios,
       boguePhases: chemistry.boguePhases,
+      oxideSum: chemistry.oxideSum,
     });
 
     if (ruleResult.overallVerdict === Verdict.FAIL) {
