@@ -10,10 +10,10 @@ export default () => ({
     name: process.env.DATABASE_NAME,
   },
   narrationMode: process.env.NARRATION_MODE as NarrationMode,
-  openai: {
-    apiKey: process.env.OPENAI_API_KEY,
-    baseUrl: process.env.OPENAI_BASE_URL,
-    model: process.env.OPENAI_MODEL,
+  llm: {
+    apiKey: process.env.LLM_API_KEY,
+    baseUrl: process.env.LLM_BASE_URL,
+    model: process.env.LLM_MODEL,
   },
   marginPct: parseFloat(process.env.MARGIN_PCT!),
 });

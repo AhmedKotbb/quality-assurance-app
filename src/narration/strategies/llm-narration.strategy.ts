@@ -23,17 +23,16 @@ export class LlmNarrationStrategy implements NarrationStrategy {
   constructor(private readonly configService: ConfigService) {}
 
   async narrate(findings: EvaluationFindings): Promise<Recommendation[]> {
-    const apiKey = this.configService.get<string>('openai.apiKey');
+    const apiKey = this.configService.get<string>('llm.apiKey');
     if (!apiKey) {
-      throw new Error('OPENAI_API_KEY is not configured');
+      throw new Error('LLM_API_KEY is not configured');
     }
 
     const baseUrl = (
-      this.configService.get<string>('openai.baseUrl') ??
-      'https://api.openai.com/v1'
+      this.configService.get<string>('llm.baseUrl') ??
+      'https://api.groq.com/openai/v1'
     ).replace(/\/$/, '');
-    const model =
-      this.configService.get<string>('openai.model') ?? 'gpt-4o-mini';
+    const model = this.configService.get<string>('llm.model') ?? 'gpt-4o-mini';
 
     const userPrompt = this.buildPrompt(findings);
     const controller = new AbortController();

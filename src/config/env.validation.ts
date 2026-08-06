@@ -9,9 +9,9 @@ export const envSchema = z.object({
   DATABASE_PASSWORD: z.string().min(1),
   DATABASE_NAME: z.string().min(1),
   NARRATION_MODE: z.enum([NarrationMode.TEMPLATE, NarrationMode.LLM]),
-  OPENAI_API_KEY: z.string(),
-  OPENAI_BASE_URL: z.url(),
-  OPENAI_MODEL: z.string().min(1),
+  LLM_API_KEY: z.string(),
+  LLM_BASE_URL: z.url(),
+  LLM_MODEL: z.string().min(1),
   MARGIN_PCT: z.coerce.number().positive(),
 });
 
