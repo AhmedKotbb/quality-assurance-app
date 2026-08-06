@@ -17,7 +17,7 @@ export class PaginationMetaDto {
 
 export class PaginatedEvaluationsResponseDto {
   @ApiProperty({ type: [EvaluationResponseDto] })
-  data!: EvaluationResponseDto[];
+  items!: EvaluationResponseDto[];
 
   @ApiProperty({ type: PaginationMetaDto })
   pagination!: PaginationMetaDto;

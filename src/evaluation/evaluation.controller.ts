@@ -7,12 +7,12 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-} from '@nestjs/swagger';
+  ApiWrappedCreatedResponse,
+  ApiWrappedOkResponse,
+  ResponseMessage,
+} from '../common';
 import { CreateEvaluationDto } from './dto/create-evaluation.dto';
 import { EvaluationResponseDto } from './dto/evaluation-response.dto';
 import { FindEvaluationsQueryDto } from './dto/find-evaluations-query.dto';
@@ -28,14 +28,16 @@ export class EvaluationController {
   @ApiOperation({
     summary: 'Evaluate ASTM C150 Type I cement readings',
   })
-  @ApiCreatedResponse({ type: EvaluationResponseDto })
+  @ResponseMessage('Evaluation completed successfully')
+  @ApiWrappedCreatedResponse(EvaluationResponseDto)
   create(@Body() dto: CreateEvaluationDto): Promise<EvaluationResponseDto> {
     return this.evaluationService.evaluate(dto);
   }
 
   @Get()
   @ApiOperation({ summary: 'List evaluation reports' })
-  @ApiOkResponse({ type: PaginatedEvaluationsResponseDto })
+  @ResponseMessage('Evaluations retrieved successfully')
+  @ApiWrappedOkResponse(PaginatedEvaluationsResponseDto)
   findAll(
     @Query() query: FindEvaluationsQueryDto,
   ): Promise<PaginatedEvaluationsResponseDto> {
@@ -44,7 +46,8 @@ export class EvaluationController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get an evaluation report by id' })
-  @ApiOkResponse({ type: EvaluationResponseDto })
+  @ResponseMessage('Evaluation retrieved successfully')
+  @ApiWrappedOkResponse(EvaluationResponseDto)
   findOne(
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<EvaluationResponseDto> {

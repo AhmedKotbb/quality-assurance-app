@@ -80,7 +80,7 @@ export class EvaluationService {
     });
 
     return {
-      data: rows.map((report) => this.toResponse(report)),
+      items: rows.map((report) => this.toResponse(report)),
       pagination: {
         total: count,
         page,
