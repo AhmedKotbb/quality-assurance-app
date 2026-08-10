@@ -14,7 +14,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "60.0 – 67.0",
-      "notes": "Process control band for Type I OPC (no CaO limit in ASTM C150 Table 1 for Type I)"
+      "notes": "Primary lime source for calcium silicates; adequate CaO supports alite (C3S) and early Type I strength, while excess raises free-lime risk and unsoundness."
     },
     {
       "parameter": "SiO2",
@@ -26,7 +26,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "18.0 – 24.0",
-      "notes": "Process control band for Type I OPC (no SiO2 limit in ASTM C150 Table 1 for Type I)"
+      "notes": "Forms C3S and C2S with lime; sufficient SiO2 builds silicate strength potential, while excess raises the silica ratio and makes the mix harder to burn."
     },
     {
       "parameter": "Al2O3",
@@ -38,7 +38,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "3.0 – 8.0",
-      "notes": "Process control band for Type I OPC (no Al2O3 limit in ASTM C150 Table 1 for Type I; Type II max is 6.0%)"
+      "notes": "Forms C3A and kiln liquid phase; higher Al2O3 increases heat of hydration and speeds set but weakens sulfate resistance."
     },
     {
       "parameter": "Fe2O3",
@@ -50,7 +50,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "1.5 – 4.5",
-      "notes": "Process control band for Type I OPC (no Fe2O3 limit in ASTM C150 Table 1 for Type I; Type II max is 6.0%)"
+      "notes": "Forms C4AF and provides clinkering flux; higher Fe2O3 darkens OPC and fluidizes melt, while low Fe2O3 reduces burnability and shifts balance toward C3A."
     },
     {
       "parameter": "MgO",
@@ -61,7 +61,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "<= 6.0",
-      "notes": "ASTM C150-22 Table 1"
+      "notes": "Excess magnesia (periclase) can cause delayed expansion and unsoundness in hardened concrete; ASTM C150 Type I limits MgO to ≤ 6.0%."
     },
     {
       "parameter": "SO3",
@@ -70,7 +70,7 @@
       "unit": "%",
       "group": "chemical",
       "required": true,
-      "notes": "ASTM C150-22 Table 1 — SO3 ceiling depends on Bogue C3A",
+      "notes": "Regulates set with C3A via gypsum; excess SO3 risks false set and sulfate-related expansion, so ASTM C150 caps SO3 at 3.0% (C3A ≤ 8%) or 3.5% (C3A > 8%).",
       "conditional": [
         {
           "whenPath": "bogue.C3A",
@@ -97,7 +97,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "<= 3.0",
-      "notes": "ASTM C150-22 Table 1 when limestone is not an ingredient (3.5% max when limestone is an ingredient)"
+      "notes": "High loss on ignition indicates prehydration, carbonation, or incomplete calcination and can reduce strength consistency; ASTM C150 Type I allows ≤ 3.0% (≤ 3.5% if limestone is an ingredient)."
     },
     {
       "parameter": "IR",
@@ -108,7 +108,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "<= 1.5",
-      "notes": "ASTM C150-22 Table 1"
+      "notes": "Insoluble residue marks non-reactive contamination or underburned material that dilutes reactive clinker phases; ASTM C150 Type I limits IR to ≤ 1.5%."
     },
     {
       "parameter": "freeLime",
@@ -119,7 +119,7 @@
       "group": "chemical",
       "required": true,
       "limitLabel": "<= 1.5",
-      "notes": "Plant/process control band (not a numbered ASTM C150 Type I Table 1 limit)"
+      "notes": "Uncombined CaO causes delayed expansion and unsoundness in hardened paste; elevated free lime also signals incomplete burning or over-limed feed."
     },
     {
       "parameter": "LSF",
@@ -131,7 +131,7 @@
       "group": "process",
       "required": true,
       "limitLabel": "0.92 – 0.98",
-      "notes": "Process control band for kiln feed / clinker (not an ASTM C150 Table 1 limit)"
+      "notes": "Lime saturation index controlling alite potential: higher LSF favors C3S and early strength but raises free-lime risk; lower LSF favors belite and weaker early strength."
     },
     {
       "parameter": "SR",
@@ -143,7 +143,7 @@
       "group": "process",
       "required": true,
       "limitLabel": "2.0 – 3.0",
-      "notes": "Process control band — silica modulus (not an ASTM C150 Table 1 limit)"
+      "notes": "Silica modulus (SiO2/(Al2O3+Fe2O3)): higher SR increases silicate content but reduces liquid phase and burnability; lower SR increases melt and can soften clinker with lower silicate strength potential."
     },
     {
       "parameter": "AR",
@@ -155,7 +155,7 @@
       "group": "process",
       "required": true,
       "limitLabel": "1.3 – 2.5",
-      "notes": "Process control band — alumina modulus (not an ASTM C150 Table 1 limit)"
+      "notes": "Alumina modulus (Al2O3/Fe2O3) balances C3A vs C4AF: higher AR raises heat of hydration and weakens sulfate resistance; lower AR darkens cement and slows early strength while improving sulfate resistance."
     },
     {
       "parameter": "oxideSum",
@@ -167,7 +167,7 @@
       "group": "process",
       "required": true,
       "limitLabel": "95.0 – 105.0",
-      "notes": "Plausibility band for reported oxide analysis sum (not an ASTM C150 Table 1 limit)"
+      "notes": "Checks analytical integrity of the oxide report; sums outside ~95–105% make LSF, SR, AR, and Bogue phases unreliable for Type I quality decisions."
     },
     {
       "parameter": "C3S",
@@ -178,7 +178,7 @@
       "group": "phases",
       "required": true,
       "limitLabel": ">= 45.0",
-      "notes": "Advisory early-strength process band (no C3S limit in ASTM C150 Table 1 for Type I)"
+      "notes": "Alite is the main early-strength phase in Type I OPC; higher C3S accelerates hydration and early compressive strength through about 28 days."
     },
     {
       "parameter": "C2S",
@@ -190,7 +190,7 @@
       "group": "phases",
       "required": true,
       "limitLabel": "5.0 – 30.0",
-      "notes": "Advisory Type I process band (no C2S limit in ASTM C150 Table 1 for Type I; Type IV min is 40%)"
+      "notes": "Belite hydrates slowly and supports later-age strength; excess C2S (low C3S) weakens early Type I strength, while very low C2S often signals an over-limed mix."
     },
     {
       "parameter": "C3A",
@@ -201,7 +201,7 @@
       "group": "phases",
       "required": true,
       "limitLabel": "<= 15.0",
-      "notes": "Advisory Type I process band (no C3A limit in ASTM C150 Table 1 for Type I; Type III max is 15%)"
+      "notes": "Tricalcium aluminate drives early heat and setting; high C3A reduces sulfate resistance and raises the ASTM SO3 ceiling when C3A exceeds 8%."
     },
     {
       "parameter": "C4AF",
@@ -213,7 +213,7 @@
       "group": "phases",
       "required": true,
       "limitLabel": "5.0 – 15.0",
-      "notes": "Advisory Type I process band (no C4AF limit in ASTM C150 Table 1 for Type I)"
+      "notes": "Ferrite acts as clinkering flux with little strength contribution; higher C4AF darkens OPC and aids sulfate resistance, while low C4AF reduces melt and can raise C3A if alumina stays high."
     }
   ]
 }
